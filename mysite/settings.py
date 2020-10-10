@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Redirect
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Database
