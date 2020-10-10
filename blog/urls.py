@@ -1,6 +1,7 @@
-from django.urls import path # to resolve NameError: Name 'path' is not defined
-from blog import views # to resolve NameError: name 'views' is not defined
+from django.urls import path
+from . import views
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
 ]
