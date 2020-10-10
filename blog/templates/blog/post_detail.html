@@ -2,18 +2,22 @@
 
 {% block content %}
     <div class="post">
-        {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }}
-                {% if user.is_authenticated %}
-                    <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                {% endif %}
-            </div>
-        {% endif %}
-        <h1>{{ post.title }}</h1>
+        <h1>
+            {{ post.title }}
+            {% if user.is_authenticated %}
+                <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% endif %}
+        </h1>
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
+
+    {% if post.published_date %}
+        <div class="date">
+            작성일: {{ post.created_date }}<br>
+            마지막 수정: {{ post.published_date }}
+        </div>
+    {% endif %}
     <hr>
 
     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
