@@ -12,5 +12,6 @@
             {% endfor %}
         </table>
         <button type="submit" class="submit">Sign up</button>
+        <p>주의: {{ form.errors.items|get_value_at:0|striptags }}</p>
     </form>
 {% endblock %}

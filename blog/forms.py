@@ -18,9 +18,9 @@ class CommentForm(forms.ModelForm):
 
 
 class AccountForm(UserCreationForm):
-    username = forms.CharField(max_length=30)
+    first_name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=200)
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'password1', 'password2', 'email')
