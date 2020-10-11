@@ -21,7 +21,7 @@
 
     <a class="right btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
     {% for comment in post.comments.all %}
-        {% if comment.approved_comment %}
+        {% if user.is_authenticated or comment.approved_comment %}
             <div class="comment">
                 <tr>
                     <td><strong>{{ comment.author }}</strong> </td>
