@@ -3,7 +3,7 @@
 {% block content %}
     {% for post in posts %}
         <div class="post">
-            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|truncatechars:50 }}</a></h1>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|truncatechars:40 }}</a></h1>
             <div class="date">
                 {{ post.created_date }}
             </div>

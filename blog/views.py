@@ -1,12 +1,29 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 from django.utils import timezone
 from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, AccountForm
 
 # Create your views here.
+
+def account_new(request):
+    if request.method == "POST":
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = AccountForm(request.POST)
+    return render(request, 'registration/account_new.html', {'form': form})
+
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('created_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-created_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):

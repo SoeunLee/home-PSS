@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>Sign up Form</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        <table class="table">
+            {% for field in form %}
+                <tr>
+                    <td>{{ field.label_tag }}</td>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button type="submit" class="submit">Sign up</button>
+    </form>
+{% endblock %}
