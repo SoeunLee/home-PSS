@@ -1,25 +1,27 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.utils import timezone
 from .models import Post, Comment
-from .forms import PostForm, CommentForm, AccountForm
+from .forms import PostForm, CommentForm, UserCreationForm
 
 # Create your views here.
 
+# User
 def account_new(request):
     if request.method == "POST":
-        form = AccountForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
+            user = form.save()
+            # username = form.cleaned_data.get('username')
+            # password = form.cleaned_data.get('password1')
+            # user = authenticate(username=username, password=password)
+            # login(request, user)
             login(request, user)
             return redirect('/')
     else:
-        form = AccountForm(request.POST)
+        form = UserCreationForm(request.POST)
     return render(request, 'registration/account_new.html', {'form': form})
 
 #Post
@@ -75,6 +77,7 @@ def add_comment_to_post(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.author = request.user
+            post.published_date=timezone.now()
             comment.post = post
             comment.save()
             return redirect('post_detail', pk=post.pk)
@@ -90,6 +93,7 @@ def comment_edit(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.author = request.user
+            post.published_date=timezone.now()
             comment.save()
             return redirect('post_detail', pk=comment.post.pk)
     else:
