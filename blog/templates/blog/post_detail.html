@@ -32,6 +32,7 @@
                                 <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-eye-open"></span></a>
                                 <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
                             {% else %}
+                            <a class="btn btn-default" href="{% url 'comment_edit' pk=comment.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
                             <a class="btn btn-default" href="{% url 'comment_disapprove' pk=comment.pk %}"><span class="glyphicon glyphicon-eye-close"></span></a>
                             {% endif %}
                         {% endif %}
