@@ -20,7 +20,7 @@ class CommentForm(forms.ModelForm):
 
 
 class UserCreationForm(forms.ModelForm):
-    username = forms.EmailField(label='이메일 아이디', max_length=255)
+    username = forms.EmailField(label='아이디', max_length=255)
     authorname = forms.CharField(label='닉네임', max_length=20)
     date_of_birth = forms.DateField(label='생년월일')
     password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
