@@ -21,13 +21,14 @@ class CommentForm(forms.ModelForm):
 
 class UserCreationForm(forms.ModelForm):
     username = forms.EmailField(label='이메일 아이디', max_length=255)
-    # date_of_birth = forms.
+    authorname = forms.CharField(label='닉네임', max_length=20)
+    date_of_birth = forms.DateField(label='생년월일')
     password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
     password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ('username', 'date_of_birth')
+        fields = ('username', 'password1', 'password2', 'authorname', 'date_of_birth')
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

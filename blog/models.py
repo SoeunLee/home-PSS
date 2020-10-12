@@ -71,7 +71,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     username = models.EmailField(verbose_name='username', max_length=255, unique=True, )
-    # username = models.CharField(max_length=20)
+    authorname = models.CharField(max_length=20)
     date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -79,7 +79,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['date_of_birth']
+    REQUIRED_FIELDS = ['authorname', 'date_of_birth']
 
     def has_perm(self, perm, obj=None):
         return True

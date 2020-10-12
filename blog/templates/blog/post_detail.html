@@ -3,7 +3,7 @@
 {% block content %}
     <div class="post">
         <h1>{{ post.title }}</h1>
-        <div class="right"><strong>{{ post.author.username }}</strong></div>
+        <div class="right"><strong>{{ post.author.authorname }}</strong></div>
             {% if user.is_authenticated %}
                 <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
@@ -25,7 +25,7 @@
             <div class="comment">
                 <table>
                     <tr>
-                        <td><strong>{{ comment.author.username }}</strong>&nbsp;&nbsp;</td>
+                        <td><strong>{{ comment.author.authorname }}</strong>&nbsp;&nbsp;</td>
                         <td class="date">
                             <small>
                                 {% if comment.created_date == comment.published_date %}
