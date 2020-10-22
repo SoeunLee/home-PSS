@@ -73,7 +73,7 @@ class User(AbstractBaseUser):
     username = models.EmailField(verbose_name='username', max_length=255, unique=True, )
     authorname = models.CharField(max_length=20)
     date_of_birth = models.DateField()
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()

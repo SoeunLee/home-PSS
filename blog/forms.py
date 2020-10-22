@@ -2,18 +2,18 @@ from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import Post, Comment, User
+
+
 # from django.contrib.auth.models import User
 
 
 class PostForm(forms.ModelForm):
-
     class Meta:
         model = Post
         fields = ('title', 'text',)
 
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comment
         fields = ('text',)
@@ -22,7 +22,8 @@ class CommentForm(forms.ModelForm):
 class UserCreationForm(forms.ModelForm):
     username = forms.EmailField(label='아이디', max_length=255)
     authorname = forms.CharField(label='닉네임', max_length=20)
-    date_of_birth = forms.DateField(label='생년월일', widget=forms.SelectDateWidget(years=[i for i in range(2000, 1959,-1)]))
+    date_of_birth = forms.DateField(label='생년월일',
+                                    widget=forms.SelectDateWidget(years=[i for i in range(2000, 1959, -1)]))
     password1 = forms.CharField(label='비밀번호', widget=forms.PasswordInput)
     password2 = forms.CharField(label='비밀번호 확인', widget=forms.PasswordInput)
 
@@ -54,7 +55,6 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
-
 
 
 """
